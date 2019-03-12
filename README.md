@@ -72,3 +72,30 @@ return {
     styl: generateLoaders('stylus')
   }
 ```
+
+# 如何修改mpvue小程序 动态修改小程序每个页面的导航栏背景颜色、导航栏标题颜色、导航栏标题文字内容、窗口的背景色
+
+```javascript
+<template>
+  <div>
+    这里是html
+  </div>
+</template>
+
+<script>
+export default {
+    created(){
+
+    },
+    onLoad(){
+        wx.setNavigationBarTitle({
+          title:'修改后的导航',
+        })
+        wx.setNavigationBarColor({
+          frontColor:'#ffffff', // 前景颜色值，包括按钮、标题、状态栏的颜色，仅支持 #ffffff 和 #000000 (微信小程序官方规定)
+          backgroundColor:'27ADFF' // 背景颜色值，有效值为十六进制颜色
+        })
+    }
+}
+</script>
+```
