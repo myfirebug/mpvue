@@ -57,3 +57,18 @@ var sassResourceLoader = {
     }
   }
 ```
+
+4. 最后我们把自定义加上的loader加上去
+
+```javascript
+return {
+    css: generateLoaders(),
+    wxss: generateLoaders(),
+    postcss: generateLoaders(),
+    less: generateLoaders('less'),
+    sass: generateLoaders('sass', { indentedSyntax: true }, sassResourceLoader),
+    scss: generateLoaders('sass', {}, sassResourceLoader),
+    stylus: generateLoaders('stylus'),
+    styl: generateLoaders('stylus')
+  }
+```
