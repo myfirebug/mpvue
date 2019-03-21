@@ -75,27 +75,36 @@ return {
 
 # 如何修改mpvue小程序 动态修改小程序每个页面的导航栏背景颜色、导航栏标题颜色、导航栏标题文字内容、窗口的背景色
 
-```javascript
-<template>
-  <div>
-    这里是html
-  </div>
-</template>
-
-<script>
-export default {
-    created(){
-
-    },
-    onLoad(){
-        wx.setNavigationBarTitle({
-          title:'修改后的导航',
-        })
-        wx.setNavigationBarColor({
-          frontColor:'#ffffff', // 前景颜色值，包括按钮、标题、状态栏的颜色，仅支持 #ffffff 和 #000000 (微信小程序官方规定)
-          backgroundColor:'27ADFF' // 背景颜色值，有效值为十六进制颜色
-        })
-    }
+在相应的页面里增加main.json
+```
+{
+  "navigationBarTitleText": "查询车牌号"
 }
-</script>
+```
+
+# 如何才能使用上拉加载下拉刷新
+在相应的页面里增加main.json
+```
+"enablePullUpRefresh": true,  // 上拉加载
+"enablePullDownRefresh": true // 下拉刷新
+```
+
+# 如何才能使用地图
+在app.json里增加
+```
+"permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+```
+
+# 有没有遇到过同样的问题，在使用地图时，动态获取数据，不知为何第一进入地图界面，地图的数据没有，获取成功显示数据，但第二次进入时，数据已经存在，
+导致，地图上的markers显示不出来，这里有一个hack,即在onUnload里把所有的数据置为初始值
+```
+onUnload () {
+    this.list = []
+    this.selectDetail = []
+    this.markers = []
+  }
 ```
